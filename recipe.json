@@ -1,0 +1,12 @@
+{
+    "Rifter": {
+        "ingredients": [
+            ["Tritanium", 28800],
+            ["Pyerite", 5400],
+            ["Mexallon", 2250],
+            ["Isogen", 450]
+        ],
+        "sell_price": 300000,
+        "craft_time": 64
+    }
+}
