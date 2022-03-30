@@ -1,0 +1,17 @@
+{
+    "Simple Cloth": {
+        "ingredients": [
+            ["Cotton", 1]
+        ],
+        "cost": 0,
+        "time": 0
+    },
+    "Neat Cloth": {
+        "ingredients": [
+            ["Flax", 2],
+            ["Simple Cloth", 1]
+        ],
+        "cost": 0,
+        "time": 0
+    }
+}

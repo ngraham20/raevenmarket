@@ -1,0 +1,21 @@
+{
+    "name": "bridgewatch",
+    "entries": [
+        {
+            "name": "Simple Cloth",
+            "price": 23
+        },
+        {
+            "name": "Cotton",
+            "price": 21
+        },
+        {
+            "name": "Neat Cloth",
+            "price": 105
+        },
+        {
+            "name": "Flax",
+            "price": 48
+        }
+    ]
+}
