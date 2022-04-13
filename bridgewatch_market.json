@@ -2,20 +2,24 @@
     "name": "bridgewatch",
     "entries": [
         {
-            "name": "Simple Cloth",
-            "price": 23
+            "name": "Scholar Robe 6T2",
+            "price": 181991,
+            "quality": 2
         },
         {
-            "name": "Cotton",
-            "price": 21
+            "name": "Mage Robe 6T2",
+            "price": 175998,
+            "quality": 2
         },
         {
-            "name": "Neat Cloth",
-            "price": 105
+            "name": "Cleric Robe 6T2",
+            "price": 172989,
+            "quality": 2
         },
         {
-            "name": "Flax",
-            "price": 48
+            "name": "Cloth 6T2",
+            "price": 19845,
+            "quality": 0
         }
     ]
 }

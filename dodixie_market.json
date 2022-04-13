@@ -1,0 +1,25 @@
+{
+    "name": "dodixie",
+    "entries": [
+        {
+            "name": "Tritanium",
+            "price": 346
+        },
+        {
+            "name": "Pyerite",
+            "price": 719
+        },
+        {
+            "name": "Mexallon",
+            "price": 6109
+        },
+        {
+            "name": "Isogen",
+            "price": 31280
+        },
+        {
+            "name": "Slasher",
+            "price": 40280000
+        }
+    ]
+}

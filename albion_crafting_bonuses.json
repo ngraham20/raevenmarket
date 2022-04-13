@@ -1,0 +1,42 @@
+{
+    "Fort Sterling": {
+        "Cloth Armor": 0.15,
+        "Hammer": 0.15,
+        "Spear": 0.15,
+        "Holy Staff": 0.15,
+        "Plate Helmet": 0.15,
+        "Wood": 0.4
+    },
+    "Lymhurst": {
+        "Sword": 0.15,
+        "Bow": 0.15,
+        "Arcane Staff": 0.15,
+        "Leather Helmet": 0.15,
+        "Leather Shoes": 0.15,
+        "Fiber": 0.4
+    },
+    "Bridgewatch": {
+        "Crossbow": 0.15,
+        "Dagger": 0.15,
+        "Cursed Staff": 0.15,
+        "Plate Helmet": 0.15,
+        "Cloth Shoes": 0.15,
+        "Rock": 0.4
+    },
+    "Martlock": {
+        "Axe": 0.15,
+        "Quarterstaff": 0.15,
+        "Frost Staff": 0.15,
+        "Plate Shoes": 0.15,
+        "Off-Hand": 0.15,
+        "Hide": 0.4
+    },
+    "Thetford": {
+        "Mace": 0.15,
+        "Nature Staff": 0.15,
+        "Fire Staff": 0.15,
+        "Leather Armor": 0.15,
+        "Cloth Helmet": 0.15,
+        "Ore": 0.4
+    }
+}

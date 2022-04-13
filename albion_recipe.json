@@ -1,17 +1,8 @@
 {
-    "Simple Cloth": {
+    "Mage Robe 6T2": {
+        "item_type": "Cloth Armor",
         "ingredients": [
-            ["Cotton", 1]
-        ],
-        "cost": 0,
-        "time": 0
-    },
-    "Neat Cloth": {
-        "ingredients": [
-            ["Flax", 2],
-            ["Simple Cloth", 1]
-        ],
-        "cost": 0,
-        "time": 0
+        ["Cloth 6T2", 16]
+        ]
     }
 }
