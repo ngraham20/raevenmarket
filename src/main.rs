@@ -1,7 +1,3 @@
-use std::collections::{HashMap};
-
-
-
 // input both fiber and cloth items up through T8
 // input recipes
 // get profits and losses
@@ -22,8 +18,16 @@ fn main() {
         recipe: None,
         recipe_file: "eve_recipe.json"
     };
+    let bp = EVEBlueprint {
+        material_efficiency: 10,
+        time_efficiency: 20
+    };
 
     s.load_recipe().unwrap();
+    if let Some(r) = s.recipe().unwrap() {
+        println!("{:?}", r);
+    }
+    s.apply_modifiers(bp).unwrap();
     if let Some(r) = s.recipe().unwrap() {
         println!("{:?}", r);
     }

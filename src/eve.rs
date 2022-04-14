@@ -86,7 +86,7 @@ impl<'a> ShipType<'a> {
         }
     }
 
-    fn shipname(&self) -> &'a str {
+    fn _shipname(&self) -> &'a str {
         match *self {
             ShipType::Frigate(n) => n,
             ShipType::Destroyer(n) => n,
@@ -97,13 +97,21 @@ impl<'a> ShipType<'a> {
 
 pub trait Recipe {
     type Data;
+    type Modifiers;
     fn load_recipe(&mut self) -> Result<(), Box<dyn Error>>;
     fn recipe(&self) -> Result<&Self::Data, Box<dyn Error>>;
+    fn apply_modifiers(&mut self, modifiers: Self::Modifiers) -> Result<(), Box<dyn Error>>;
     fn cost(&self) -> Result<usize, Box<dyn Error>>;
+}
+
+pub struct EVEBlueprint {
+    pub time_efficiency: usize,
+    pub material_efficiency: usize,
 }
 
 impl<'a> Recipe for Ship<'a> {
     type Data = Option<EVERecipe>;
+    type Modifiers = EVEBlueprint;
     fn load_recipe(&mut self) -> Result<(), Box<dyn Error>> {
         let file = File::open(&self.recipe_file)?;
         let reader = BufReader::new(file);
@@ -115,6 +123,16 @@ impl<'a> Recipe for Ship<'a> {
 
     fn recipe(&self) -> Result<&Self::Data, Box<dyn Error>> {
         Ok(&self.recipe)
+    }
+
+    fn apply_modifiers(&mut self, modifiers: Self::Modifiers) -> Result<(), Box<dyn Error>> {
+        if let Some(r) = self.recipe.as_mut() {
+            let m = modifiers.material_efficiency;
+            let t = modifiers.time_efficiency;
+            r.ingredients.iter_mut().for_each(|(_, y)|{*y -= *y * m/100});
+            r.manufacture_time -= r.manufacture_time * t/100;
+        }
+        Ok(())
     }
     fn cost(&self) -> Result<usize, Box<dyn Error>> {
         Ok(0usize)
