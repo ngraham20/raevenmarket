@@ -1,12 +1,13 @@
 {
-    "Rifter": {
+    "Frigate-T1": {
         "ingredients": [
-            ["Tritanium", 28800],
-            ["Pyerite", 5400],
-            ["Mexallon", 2250],
-            ["Isogen", 450]
+            ["Tritanium", 34848],
+            ["Pyerite", 6534],
+            ["Mexallon", 2723],
+            ["Isogen", 545]
         ],
-        "sell_price": 300000,
-        "craft_time": 64
+        "manufacture_time": 68
     }
 }
+
+

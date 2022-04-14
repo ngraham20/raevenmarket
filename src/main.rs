@@ -16,19 +16,15 @@ use eve::*;
 
 fn main() {
 
-    let mut e = EVEItem {
-        category: EVEItemCategory::Ship(Ship::Frigate("Slasher".to_string())),
-        tech: 1,
-        recipe: HashMap::new(),
-        recipe_path: "test_recipe.json".to_string()
+    let mut s = Ship {
+        shiptype: ShipType::Frigate("Punisher"),
+        techlevel: 1,
+        recipe: None,
+        recipe_file: "eve_recipe.json"
     };
 
-    e.recipe.insert("Slasher".to_string(), vec![
-        ("Tritanium".to_string(), 1),
-        ("Pyerite".to_string(), 2),
-        ("Mexallon".to_string(), 3),
-        ("Isogen".to_string(), 4)
-    ]);
-
-    e.store_recipe().unwrap();
+    s.load_recipe().unwrap();
+    if let Some(r) = s.recipe().unwrap() {
+        println!("{:?}", r);
+    }
 }

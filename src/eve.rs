@@ -20,6 +20,11 @@ pub struct EVEMarketEntry<'a> {
     location: EVEStation
 }
 
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct EVERecipe {
+    ingredients: Vec<(String, usize)>,
+    manufacture_time: usize
+}
 
 #[derive(Serialize, Deserialize, Debug)]
 pub enum EVEItem<'a> {
@@ -46,7 +51,9 @@ pub enum Mineral {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Module<'a> {
     #[serde(borrow)]
-    modtype: ModuleType<'a>
+    modtype: ModuleType<'a>,
+    techlevel: usize,
+    recipe: EVERecipe,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -57,10 +64,10 @@ pub enum ModuleType<'a> {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Ship<'a> {
     #[serde(borrow)]
-    shiptype: ShipType<'a>,
-    techlevel: usize,
-    recipe: HashMap<String, Vec<(String, usize)>>,
-    recipe_file: &'a str
+    pub shiptype: ShipType<'a>,
+    pub techlevel: usize,
+    pub recipe: Option<EVERecipe>,
+    pub recipe_file: &'a str
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -70,26 +77,44 @@ pub enum ShipType<'a> {
     Cruiser(&'a str)
 }
 
-trait Recipe {
+impl<'a> ShipType<'a> {
+    fn typestring(&self) -> &'a str {
+        match *self {
+            ShipType::Frigate(_) => "Frigate",
+            ShipType::Destroyer(_) => "Destroyer",
+            ShipType::Cruiser(_) => "Cruiser"
+        }
+    }
+
+    fn shipname(&self) -> &'a str {
+        match *self {
+            ShipType::Frigate(n) => n,
+            ShipType::Destroyer(n) => n,
+            ShipType::Cruiser(n) => n
+        }
+    }
+}
+
+pub trait Recipe {
     type Data;
     fn load_recipe(&mut self) -> Result<(), Box<dyn Error>>;
-    fn recipe(&self) -> Result<Self::Data, Box<dyn Error>>;
+    fn recipe(&self) -> Result<&Self::Data, Box<dyn Error>>;
     fn cost(&self) -> Result<usize, Box<dyn Error>>;
 }
 
 impl<'a> Recipe for Ship<'a> {
-    type Data = HashMap<String, Vec<(String, usize)>>;
+    type Data = Option<EVERecipe>;
     fn load_recipe(&mut self) -> Result<(), Box<dyn Error>> {
         let file = File::open(&self.recipe_file)?;
         let reader = BufReader::new(file);
 
-        self.recipe = serde_json::from_reader(reader)?;
-
+        let jdata: HashMap<String, EVERecipe> = serde_json::from_reader(reader)?;
+        self.recipe = Some(jdata.get(&format!("{}-T{}", self.shiptype.typestring(), self.techlevel)).unwrap().to_owned());
         Ok(())
     }
 
-    fn recipe(&self) -> Result<Self::Data, Box<dyn Error>> {
-        Ok(self.recipe)
+    fn recipe(&self) -> Result<&Self::Data, Box<dyn Error>> {
+        Ok(&self.recipe)
     }
     fn cost(&self) -> Result<usize, Box<dyn Error>> {
         Ok(0usize)
