@@ -6,13 +6,17 @@
 // Recipe itself could be a hashmap based off the item name.
 // Recipe could be an item that returns its own contents.
 
-pub struct Item {
-    name: String,
-    cost: f64,
-}
+use std::error::Error;
 
-pub struct Recipe {
-    name: String,
-    ingredients: Vec<(String, usize)>,
-    cost: f64
+/// A recipe should be pretty basic, with the **Data**, which
+/// is the basic information that makes up a recipe, and the
+/// **Modifiers**, which defines how a recipe can be modified
+/// by the game.
+pub trait Recipe {
+    type Data;
+    type Modifiers;
+    fn load_recipe(&mut self) -> Result<(), Box<dyn Error>>;
+    fn recipe(&self) -> Result<&Self::Data, Box<dyn Error>>;
+    fn apply_modifiers(&mut self, modifiers: Self::Modifiers) -> Result<(), Box<dyn Error>>;
+    fn cost(&self) -> Result<usize, Box<dyn Error>>;
 }

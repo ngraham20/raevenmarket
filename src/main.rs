@@ -8,7 +8,10 @@
 // this will be a tree walk, but using a HashSet to store the item cost each time to reduce recursion depth
 
 mod eve;
-use eve::*;
+mod recipe;
+mod market;
+use eve::{Ship, ShipType, EVEBlueprint};
+use recipe::{Recipe};
 
 fn main() {
 
